@@ -9,7 +9,7 @@ export const App = () => {
   return (
     <div>
       <div>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="">Home</NavLink>
         <NavLink to="/movies">Movies</NavLink>
       </div>
 

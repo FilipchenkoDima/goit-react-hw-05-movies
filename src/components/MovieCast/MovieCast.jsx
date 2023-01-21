@@ -15,14 +15,17 @@ export const MovieCast = () => {
       {movieCast && (
         <ul>
           {movieCast.map(
-            ({ credit_id, original_name, profile_path, character }) => {
-              return (
-                <li key={credit_id}>
-                  <img src={profile_path} alt={original_name} />
-                  <p>{original_name}</p>
-                  <p>{`Character: ${character}`} </p>
-                </li>
-              );
+              ({ credit_id, original_name, profile_path, character }) => {
+                  return (
+                    <li key={credit_id}>
+                      <img
+                        src={`https://image.tmdb.org/t/p/w300${profile_path}`}
+                        alt={original_name}
+                      />
+                      <p>{original_name}</p>
+                      <p>{`Character: ${character}`} </p>
+                    </li>
+                  );
             }
           )}
         </ul>

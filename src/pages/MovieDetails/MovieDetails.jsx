@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import { NavLink, Outlet, useParams,Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getMovieById } from 'services/movie-api';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
@@ -6,6 +6,7 @@ import { MovieInfo } from 'components/MovieInfo/MovieInfo';
 export const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
+  const location = useLocation()
 
   useEffect(() => {
     getMovieById(movieId).then(setMovieDetails);
@@ -15,7 +16,7 @@ export const MovieDetails = () => {
     <>
       {movieDetails && (
         <div>
-          <button type="button">Go back</button>
+          <Link to={location.state?.from ?? '/'}>Go back</Link>
           <MovieInfo movieDetails={movieDetails} />
           <div>
             <p>Additional information</p>

@@ -4,7 +4,7 @@ export const MovieInfo = ({ movieDetails }) => {
 
   return (
     <>
-      <img src={poster_path} alt={title} />
+      <img src={`https://image.tmdb.org/t/p/w300${poster_path}`} alt={title} />
       <div>
         <h2>{`${title}  (${release_date.slice(0, 4)})`}</h2>
         <p>{`User score: ${Math.round(vote_average * 10)}%`}</p>

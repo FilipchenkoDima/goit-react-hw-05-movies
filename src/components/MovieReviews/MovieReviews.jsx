@@ -10,20 +10,26 @@ export const MovieReviews = () => {
     getReviewsById(movieId).then(setMovieReviews);
   }, [movieId]);
 
+  if (!movieReviews) {
+    return;
+  }
+
+  if (movieReviews.length === 0) {
+    return <p>We don't have any review for this movie</p>;
+  }
+
   return (
     <>
-      {movieReviews && (
-        <ul>
-          {movieReviews.map(review => {
-            return (
-              <li key={review.id}>
-                <p>{`Author: ${review.author}`}</p>
-                <p>{review.content}</p>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      <ul>
+        {movieReviews.map(review => {
+          return (
+            <li key={review.id}>
+              <p>{`Author: ${review.author}`}</p>
+              <p>{review.content}</p>
+            </li>
+          );
+        })}
+      </ul>
     </>
   );
 };

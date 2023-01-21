@@ -19,6 +19,22 @@ export const getMovieById = async id => {
   return response.data;
 };
 
+export const getCastById = async id => {
+    const response = await axios.get(`/movie/${id}/credits`, {
+      params: options,
+    });
+    return response.data.cast;
+}
+
+export const getReviewsById = async id => {
+  const response = await axios.get(`/movie/${id}/reviews`, {
+    params: options,
+  });
+  return response.data.results;
+};
+
+
+// /movie/{movie_id}/credits reviews
 // /movie/{movie_id}
 
 // https://api.themoviedb.org/3/trending/movie/day?api_key=1f44a581d5740433e0c62a3a05886d44

@@ -18,6 +18,7 @@ export const MovieList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  list-style: none;
 `;
 
 export const ListItem = styled(Link)`

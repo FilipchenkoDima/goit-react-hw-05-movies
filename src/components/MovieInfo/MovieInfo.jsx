@@ -1,3 +1,4 @@
+import { PropTypes } from 'prop-types';
 import { MovieImg, MoviePosition } from './MovieInfo.styled';
 
 export const MovieInfo = ({ movieDetails }) => {
@@ -24,4 +25,15 @@ export const MovieInfo = ({ movieDetails }) => {
       </div>
     </MoviePosition>
   );
+};
+
+MovieInfo.propTypes = {
+  movieDetails: PropTypes.shape({
+    poster_path: PropTypes.string,
+    title: PropTypes.string,
+    release_date: PropTypes.string,
+    vote_average: PropTypes.number,
+    overview: PropTypes.string,
+    genres: PropTypes.array,
+  }),
 };

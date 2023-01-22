@@ -15,7 +15,7 @@ export const GoBackBtn = styled(Link)`
   :hover,
   :active {
     color: #ff7f50;
-    background-color: #f0f8ff;
+    background-color: #1111;
   }
 `;
 

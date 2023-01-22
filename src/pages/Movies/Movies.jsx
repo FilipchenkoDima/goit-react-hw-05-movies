@@ -1,14 +1,21 @@
 import { useState, useEffect } from 'react';
-import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { getSearchMovie } from 'services/movie-api';
-import { FormWrapper, MovieFinderInput } from './Movies.styled';
+import {
+  FormWrapper,
+  MovieFinderInput,
+  MovieItem,
+  MovieSearchBtn,
+  MovieList,
+} from './Movies.styled';
+import { MdSearch } from 'react-icons/md';
 
-export const Movies = () => {
+const Movies = () => {
   const [movieName, setMovieName] = useState('');
   const [movieList, setMovieList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get('query') ?? '';
-  const location = useLocation() 
+  const location = useLocation();
 
   useEffect(() => {
     if (!filter) {
@@ -40,19 +47,21 @@ export const Movies = () => {
             value={movieName}
           />
         </label>
-        <button type="submit">Search</button>
+        <MovieSearchBtn type="submit">{<MdSearch />}</MovieSearchBtn>
       </FormWrapper>
-      <ul>
+      <MovieList>
         {movieList.map(({ id, title }) => {
           return (
             <li key={id}>
-              <NavLink state={{ from: location }} to={`/movies/${id}`}>
+              <MovieItem state={{ from: location }} to={`/movies/${id}`}>
                 {title}
-              </NavLink>
+              </MovieItem>
             </li>
           );
         })}
-      </ul>
+      </MovieList>
     </>
   );
 };
+
+export default Movies;

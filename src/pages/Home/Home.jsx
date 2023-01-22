@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { HomeWrapper, HomeTitle, MovieList, ListItem } from './Home.styled';
 
-export const Home = () => {
+const Home = () => {
   const [movies, setMovies] = useState([]);
   const location = useLocation();
 
@@ -28,3 +28,5 @@ export const Home = () => {
     </HomeWrapper>
   );
 };
+
+export default Home;

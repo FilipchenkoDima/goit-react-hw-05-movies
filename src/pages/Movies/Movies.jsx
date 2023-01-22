@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import { getSearchMovie } from 'services/movie-api';
+import { FormWrapper, MovieFinderInput } from './Movies.styled';
 
 export const Movies = () => {
   const [movieName, setMovieName] = useState('');
@@ -31,17 +32,23 @@ export const Movies = () => {
 
   return (
     <>
-      <form onSubmit={handlerSubmit}>
+      <FormWrapper onSubmit={handlerSubmit}>
         <label>
-          <input type="text" onChange={getMovieName} value={movieName} />
+          <MovieFinderInput
+            type="text"
+            onChange={getMovieName}
+            value={movieName}
+          />
         </label>
         <button type="submit">Search</button>
-      </form>
+      </FormWrapper>
       <ul>
         {movieList.map(({ id, title }) => {
           return (
             <li key={id}>
-              <NavLink state={{from: location}} to={`/movies/${id}`}>{title}</NavLink>
+              <NavLink state={{ from: location }} to={`/movies/${id}`}>
+                {title}
+              </NavLink>
             </li>
           );
         })}

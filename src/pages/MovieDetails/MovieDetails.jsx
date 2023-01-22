@@ -1,12 +1,19 @@
-import { NavLink, Outlet, useParams,Link, useLocation } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getMovieById } from 'services/movie-api';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
+import {
+  GoBackBtn,
+  MovieDetailsPosition,
+  AdditionalInfoList,
+  AdditionalInfoTitle,
+  AdditionalInfoItem,
+} from './MovieDetails.styled';
 
 export const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
-  const location = useLocation()
+  const location = useLocation();
 
   useEffect(() => {
     getMovieById(movieId).then(setMovieDetails);
@@ -15,22 +22,28 @@ export const MovieDetails = () => {
   return (
     <>
       {movieDetails && (
-        <div>
-          <Link to={location.state?.from ?? '/'}>Go back</Link>
-          <MovieInfo movieDetails={movieDetails} />
-          <div>
-            <p>Additional information</p>
-            <ul>
-              <li>
-                <NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink>
-              </li>
-              <li>
-                <NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink>
-              </li>
-            </ul>
-          </div>
-          <Outlet />
-        </div>
+        <>
+          <GoBackBtn to={location.state?.from ?? '/'}>Go back</GoBackBtn>
+          <MovieDetailsPosition>
+            <MovieInfo movieDetails={movieDetails} />
+            <div>
+              <AdditionalInfoTitle>Additional information</AdditionalInfoTitle>
+              <AdditionalInfoList>
+                <li>
+                  <AdditionalInfoItem to={`/movies/${movieId}/cast`}>
+                    Cast
+                  </AdditionalInfoItem>
+                </li>
+                <li>
+                  <AdditionalInfoItem to={`/movies/${movieId}/reviews`}>
+                    Reviews
+                  </AdditionalInfoItem>
+                </li>
+              </AdditionalInfoList>
+            </div>
+            <Outlet />
+          </MovieDetailsPosition>
+        </>
       )}
     </>
   );

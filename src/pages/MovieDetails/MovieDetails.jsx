@@ -1,5 +1,5 @@
 import { Outlet, useParams, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getMovieById } from 'services/movie-api';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
 import {
@@ -19,11 +19,13 @@ const MovieDetails = () => {
     getMovieById(movieId).then(setMovieDetails);
   }, [movieId]);
 
+  const currentLocation = useRef(location.state?.from ?? '/');
+
   return (
     <>
       {movieDetails && (
         <>
-          <GoBackBtn to={location.state?.from ?? '/'}>Go back</GoBackBtn>
+          <GoBackBtn to={currentLocation.current}>Go back</GoBackBtn>
           <MovieDetailsPosition>
             <MovieInfo movieDetails={movieDetails} />
             <div>
